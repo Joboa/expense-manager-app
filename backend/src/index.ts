@@ -1,10 +1,17 @@
 import express from 'express'
-const app = express()
-const port = 5000
+import { json, urlencoded } from 'body-parser'
+export const app = express()
+import "reflect-metadata";
+
+app.use(json())
+app.use(urlencoded({ extended: true }))
 
 app.get('/', (req, res) => {
-  res.send({ message: 'expense manager app' })
+  res.status(200).send({message: 'expense manager app'})
 })
 
+const port = 5000
 
-app.listen(port, () => console.log(`Listening on port ${port}`))
+app.listen(port, () => {
+  console.log(`Listening on ${port}`)
+})
