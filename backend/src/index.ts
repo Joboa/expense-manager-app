@@ -1,4 +1,5 @@
-import "reflect-metadata";
+import "reflect-metadata"
+require('dotenv').config()
 import express, {Application} from 'express'
 import { json, urlencoded } from 'body-parser'
 

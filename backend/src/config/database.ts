@@ -3,11 +3,11 @@ import {User, Expense} from '../models'
 
 const config: ConnectionOptions =({
     type: "postgres",
-    host: "localhost",
-    port: 5432,
-    username: "joboa",
-    password: "learningNode21",
-    database: "expensedb",
+    host: process.env.HOST,
+    port: parseInt(process.env.PORT_DB),
+    username: process.env.USERNAME_DB,
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE,
     entities: [User, Expense],
     synchronize: true,
 })
