@@ -12,8 +12,11 @@ const app: Application = express()
 app.use(json())
 app.use(urlencoded({ extended: true }))
 
-
 const PORT = process.env.PORT || 5000
+
+app.get('/', (req, res) => {
+  res.status(200).send({message: 'learning node!'})
+})
 
 createConnection(dbconfig)
   .then((connection) => {

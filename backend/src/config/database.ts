@@ -6,8 +6,8 @@ const config: ConnectionOptions =({
     host: process.env.HOST,
     port: parseInt(process.env.PORT_DB),
     username: process.env.USERNAME_DB,
-    password: process.env.PASSWORD,
-    database: process.env.DATABASE,
+    password: process.env.PASSWORD_DB,
+    database: process.env.DATABASE_DB,
     entities: [User, Expense],
     synchronize: true,
 })
