@@ -5,4 +5,4 @@
 4. Setup a local postgress database
 5. Add typeORM repository to create the following functionalities
    for user: getUser, getUsers and createUser
-6. Add a user controller to handle the   
+6. Add a user controller
