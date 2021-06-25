@@ -3,7 +3,7 @@ import { getRepository } from 'typeorm'
 
 describe('User model', () => {
     describe('schema', () => {
-        test('firstName', () => {
+        test('user entities', () => {
             const user = new User()
             user.id = 1
             user.firstName = 'firstName'
