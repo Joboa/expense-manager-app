@@ -6,3 +6,5 @@
 5. Add typeORM repository to create the following functionalities
    for user: getUser, getUsers and createUser
 6. Add a user controller
+7. Add test for the models, controllers and routes
+8. Add cli migration for typeORM to run migrations (as done in production MODE)
