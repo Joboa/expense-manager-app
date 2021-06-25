@@ -1,0 +1,8 @@
+# TODOS - Backend
+1. Create a basic express app
+2. Create a database config for the typeORM and postgress
+3. Add a typeORM models for users and expenses
+4. Setup a local postgress database
+5. Add typeORM repository to create the following functionalities
+   for user: getUser, getUsers and createUser
+6. Add a user controller to handle the   

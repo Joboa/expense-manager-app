@@ -4,7 +4,7 @@ import {Entity,
         ManyToOne,
         CreateDateColumn,
         JoinColumn,} from 'typeorm';
-import {User} from './user';
+// import {User} from './user';
 
 @Entity()
 export class Expense {
@@ -22,9 +22,9 @@ export class Expense {
 
   // @Column({ nullable: true })
   // userId!: number;
-  @ManyToOne(() => User, (user: User) => user.expense)
-  @JoinColumn()
-  user!: User;
+  // @ManyToOne(() => User, (user: User) => user.expense)
+  // @JoinColumn()
+  // user!: User;
 
   @CreateDateColumn()
   createdAt!: Date;}

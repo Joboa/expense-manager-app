@@ -6,7 +6,7 @@ import {
   UpdateDateColumn,
   OneToMany,
 } from "typeorm"
-import {Expense} from './expense'
+// import {Expense} from './expense'
 
 @Entity()
 export class User {
@@ -22,12 +22,15 @@ export class User {
   @Column()
   email!: string;
 
-  @OneToMany((_type) => Expense, (expense: Expense) => expense.user)
-  expense!: Array<Expense>
+  @Column()
+  password!: string;
+
+  // @OneToMany((_type) => Expense, (expense: Expense) => expense.user)
+  // expense!: Array<Expense>
 
   @CreateDateColumn()
   createdAt!: Date;
 
-  @UpdateDateColumn()
-  updatedAt!: Date;
+  // @UpdateDateColumn()
+  // updatedAt!: Date;
 }
