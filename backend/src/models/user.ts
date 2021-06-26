@@ -6,22 +6,18 @@ import {
     UpdateDateColumn,
     OneToMany,
 } from 'typeorm'
-import { IsEmail, Min, Max } from 'class-validator'
+import { IsEmail } from 'class-validator'
 
 @Entity()
 export class User {
     @PrimaryGeneratedColumn()
     id!: number
 
-    @Min(2)
-    @Max(100)
     @Column({ length: 100 })
-    firstName!: string
+    firstname!: string
 
-    @Min(2)
-    @Max(100)
     @Column({ length: 100 })
-    lastName!: string
+    lastname!: string
 
     @IsEmail()
     @Column({

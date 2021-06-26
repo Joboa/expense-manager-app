@@ -6,14 +6,14 @@ describe('User model', () => {
         test('user entities', () => {
             const user = new User()
             user.id = 1
-            user.firstName = 'firstName'
-            user.lastName = 'lastName'
+            user.firstname = 'firstname'
+            user.lastname = 'lastname'
             user.email = 'email@email.com'
             user.password = 'password'
             expect(user).toEqual({
                 id: 1,
-                firstName: 'firstName',
-                lastName: 'lastName',
+                firstname: 'firstname',
+                lastname: 'lastname',
                 email: 'email@email.com',
                 password: 'password',
             })
