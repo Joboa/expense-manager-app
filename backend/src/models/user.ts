@@ -1,36 +1,43 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  CreateDateColumn,
-  UpdateDateColumn,
-  OneToMany,
-} from "typeorm"
-// import {Expense} from './expense'
+    Entity,
+    PrimaryGeneratedColumn,
+    Column,
+    CreateDateColumn,
+    UpdateDateColumn,
+    OneToMany,
+} from 'typeorm'
+import { IsEmail, Min, Max } from 'class-validator'
 
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn()
-  id!: number;
+    @PrimaryGeneratedColumn()
+    id!: number
 
-  @Column()
-  firstName!: string;
+    @Min(2)
+    @Max(100)
+    @Column({ length: 100 })
+    firstName!: string
 
-  @Column()
-  lastName!: string;
+    @Min(2)
+    @Max(100)
+    @Column({ length: 100 })
+    lastName!: string
 
-  @Column()
-  email!: string;
+    @IsEmail()
+    @Column({
+        unique: true,
+    })
+    email!: string
 
-  @Column()
-  password!: string;
+    @Column()
+    password!: string
 
-  // @OneToMany((_type) => Expense, (expense: Expense) => expense.user)
-  // expense!: Array<Expense>
+    // @OneToMany((_type) => Expense, (expense: Expense) => expense.user)
+    // expense!: Array<Expense>
 
-  @CreateDateColumn()
-  createdAt!: Date;
+    @CreateDateColumn()
+    createdAt!: Date
 
-  // @UpdateDateColumn()
-  // updatedAt!: Date;
+    // @UpdateDateColumn()
+    // updatedAt!: Date;
 }
