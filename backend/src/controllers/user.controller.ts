@@ -5,8 +5,8 @@ import { User } from '../models'
 class UserController {
     static createUser = async (req: Request, res: Response) => {
         const newUser = {
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
             email: req.body.email,
             password: req.body.password,
         }
