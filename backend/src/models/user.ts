@@ -13,10 +13,10 @@ export class User {
     @PrimaryGeneratedColumn()
     id!: number
 
-    @Column({ length: 100 })
+    @Column({nullable: true})
     firstname!: string
 
-    @Column({ length: 100 })
+    @Column({nullable: true})
     lastname!: string
 
     @IsEmail()
