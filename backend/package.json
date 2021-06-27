@@ -8,6 +8,7 @@
     "start": "tsc & nodemon .",
     "dev": "tsc -w & nodemon .",
     "ts": "ts-node src/index.ts",
+    "ts-dev": "ts-node-dev src/index.ts",
     "test": "jest"
   },
   "author": "john agyapong boamah <joboa2015@gmail.com>",
