@@ -43,7 +43,7 @@ class UserController {
         return res.json({ message: 'User not found!' })
     }
 
-    static deleteUser = async (req: Request, res: Response) => {
+    static deleteUser = async (req: Request, res: Response): Promise<any | null> => {
         const id = req.params.id
         const deleteAUser = await getRepository(User).delete(id)
         return res.json(deleteAUser)
