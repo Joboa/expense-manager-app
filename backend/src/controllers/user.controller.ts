@@ -30,7 +30,7 @@ class UserController {
         return res.json(getUserResult)
     }
 
-    static updateUser = async (req: Request, res: Response) => {
+    static updateUser = async (req: Request, res: Response): Promise<any> => {
         const id = req.params.id
         const updateUserInfo = await getRepository(User).findOne(id)
         if (updateUserInfo) {
