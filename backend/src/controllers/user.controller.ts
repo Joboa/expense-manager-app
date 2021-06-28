@@ -3,7 +3,7 @@ import { getRepository } from 'typeorm'
 import { User } from '../models'
 
 class UserController {
-    static createUser = async (req: Request, res: Response) => {
+    static createUser = async (req: Request, res: Response): Promise<any> => {
         const newUser = {
             firstname: req.body.firstname,
             lastname: req.body.lastname,
