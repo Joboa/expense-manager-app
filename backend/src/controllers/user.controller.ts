@@ -15,7 +15,7 @@ class UserController {
         return res.status(200).json(createUserResult)
     }
 
-    static getUsers = async (req: Request, res: Response) => {
+    static getUsers = async (req: Request, res: Response): Promise<any | null> => {
         const getUsersResult = await getRepository(User).find()
         getUsersResult
             ? res.status(200).json(getUsersResult)
