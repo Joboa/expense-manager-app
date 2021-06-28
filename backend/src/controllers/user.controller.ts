@@ -22,7 +22,7 @@ class UserController {
             : res.status(400).send({ message: 'No users found!' })
     }
 
-    static getUser = async (req: Request, res: Response) => {
+    static getUser = async (req: Request, res: Response): Promise<any | null> => {
         const id = req.params.id
         const getUserResult = await getRepository(User).findOne(id)
         if (!getUserResult)
