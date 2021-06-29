@@ -4,7 +4,7 @@
 3. Add a typeORM models for users and expenses
 4. Setup a local postgress database
 5. Add typeORM repository to create the following functionalities
-   for user: getUser, getUsers and createUser
+   for user: getUser, getUsers, createUser, updateUser and deleteUser
 6. Add a user controller
 7  Hash user's password with bcrypt
 8. Add test for the models, controllers and routes
