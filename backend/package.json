@@ -14,6 +14,7 @@
   "author": "john agyapong boamah <joboa2015@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "class-validator": "^0.13.1",
     "dotenv": "^10.0.0",
