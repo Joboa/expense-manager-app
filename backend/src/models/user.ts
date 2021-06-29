@@ -3,10 +3,11 @@ import {
     PrimaryGeneratedColumn,
     Column,
     CreateDateColumn,
-    UpdateDateColumn,
-    OneToMany,
+    BeforeInsert,
 } from 'typeorm'
 import { IsEmail } from 'class-validator'
+import * as bcrypt from 'bcryptjs'
+const BCRYPT_HASH_ROUND = 8
 
 @Entity()
 export class User {
@@ -28,12 +29,11 @@ export class User {
     @Column()
     password!: string
 
-    // @OneToMany((_type) => Expense, (expense: Expense) => expense.user)
-    // expense!: Array<Expense>
+   @BeforeInsert()
+   async beforeInsert() {
+       this.password = await bcrypt.hash(this.password, BCRYPT_HASH_ROUND)
+   }
 
     @CreateDateColumn()
     createdAt!: Date
-
-    // @UpdateDateColumn()
-    // updatedAt!: Date;
 }
