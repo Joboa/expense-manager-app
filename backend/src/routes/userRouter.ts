@@ -1,21 +1,18 @@
 import { Router } from 'express'
-import UserController from '../controllers/user.controller'
+import controllers from '../controllers/user.controller'
 
 const router = Router()
 
 // /api/v1/users/
-router
-  .route('/')
-  .get(UserController.getUsers)
-  .post(UserController.createUser)
+router.route('/')
+  .get(controllers.getMany)
+  .post(controllers.createOne)
 
-
-  // /api/v1/users/:id
+// /api/v1/users/:id
 router
   .route('/:id')
-  .get(UserController.getUser)
-  .put(UserController.updateUser)
-  .delete(UserController.deleteUser)
-
+  .get(controllers.getOne)
+  .put(controllers.updateOne)
+  .delete(controllers.removeOne)
 
 export default router
