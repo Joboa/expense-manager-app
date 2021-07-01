@@ -32,7 +32,7 @@ export class User {
 
   @BeforeInsert()
   @BeforeUpdate()
-  async beforeInsert() {
+  async hashPassword(): Promise<void> {
     this.password = await bcrypt.hash(this.password, BCRYPT_HASH_ROUND)
   }
 
