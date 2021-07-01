@@ -1,9 +1,10 @@
 import {
-    Entity,
-    PrimaryGeneratedColumn,
-    Column,
-    CreateDateColumn,
-    BeforeInsert,
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  BeforeInsert,
+  BeforeUpdate,
 } from 'typeorm'
 import { IsEmail } from 'class-validator'
 import * as bcrypt from 'bcryptjs'
@@ -11,29 +12,30 @@ const BCRYPT_HASH_ROUND = 8
 
 @Entity()
 export class User {
-    @PrimaryGeneratedColumn()
-    id!: number
+  @PrimaryGeneratedColumn()
+  id!: number
 
-    @Column({nullable: true})
-    firstname!: string
+  @Column({ nullable: true })
+  firstname!: string
 
-    @Column({nullable: true})
-    lastname!: string
+  @Column({ nullable: true })
+  lastname!: string
 
-    @IsEmail()
-    @Column({
-        unique: true,
-    })
-    email!: string
+  @IsEmail()
+  @Column({
+    unique: true,
+  })
+  email!: string
 
-    @Column()
-    password!: string
+  @Column()
+  password!: string
 
-   @BeforeInsert()
-   async beforeInsert() {
-       this.password = await bcrypt.hash(this.password, BCRYPT_HASH_ROUND)
-   }
+  @BeforeInsert()
+  @BeforeUpdate()
+  async beforeInsert() {
+    this.password = await bcrypt.hash(this.password, BCRYPT_HASH_ROUND)
+  }
 
-    @CreateDateColumn()
-    createdAt!: Date
+  @CreateDateColumn()
+  createdAt!: Date
 }
