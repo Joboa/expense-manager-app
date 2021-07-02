@@ -42,6 +42,7 @@ export const signup = async (req: Request, res: Response): Promise<any> => {
   }
 }
 
+// Sign in an already registered User
 export const signin = async (req: Request, res: Response) => {
   if (!req.body.email || !req.body.password) {
     return res.status(400).send({ message: 'need email and password' })
