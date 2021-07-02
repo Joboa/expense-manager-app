@@ -34,6 +34,11 @@ export class User {
   @BeforeUpdate()
   async hashPassword(): Promise<void> {
     this.password = await bcrypt.hash(this.password, BCRYPT_HASH_ROUND)
+
+  }
+
+  isValidPassword = (password: string) => {
+    return bcrypt.compare(password, this.password)
   }
 
   @CreateDateColumn()
