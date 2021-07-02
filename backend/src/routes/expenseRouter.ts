@@ -1,20 +1,19 @@
 import { Router } from 'express'
-import controllers from '../controllers/expense.controller'
+import ExpenseController from '../controllers/expense.controller'
 
 const router = Router()
 
 // /api/v1/expenses/
 router
   .route('/')
-  .get(controllers.getMany)
-  .post(controllers.createOne)
+  .get(ExpenseController.getExpenses)
+  .post(ExpenseController.createExpense)
 
-
-  // /api/v1/expenses/:id
+// /api/v1/expenses/:id
 router
   .route('/:id')
-  .get(controllers.getOne)
-  .put(controllers.updateOne)
-  .delete(controllers.removeOne)
+  .get(ExpenseController.getExpense)
+  .put(ExpenseController.updateExpense)
+  .delete(ExpenseController.deleteExpense)
 
 export default router
