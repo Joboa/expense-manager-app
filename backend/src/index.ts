@@ -3,7 +3,7 @@ require('dotenv').config()
 import express, { Application } from 'express'
 import { json, urlencoded } from 'body-parser'
 
-import { signup, signin } from './utils/auth'
+import { signup, signin, authenticateToken } from './utils/auth'
 import userRouter from './routes/userRouter'
 import expenseRouter from './routes/expenseRouter'
 import { createConnection } from 'typeorm'
@@ -17,6 +17,7 @@ app.use(urlencoded({ extended: true }))
 app.post('/signup', signup)
 app.post('/signin', signin)
 
+app.use('/api/v1', authenticateToken)
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/expenses', expenseRouter)
 
