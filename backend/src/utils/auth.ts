@@ -5,26 +5,23 @@ import jwt from 'jsonwebtoken'
 
 // Generate new token
 export const newToken = (user: any): string => {
-  return jwt.sign({ id: user.id }, process.env.JWT_SECRET_KEY, {
+  return jwt.sign({ id: user.id }, process.env.ACCESS_TOKEN_KEY, {
     expiresIn: process.env.JWT_EXPIRATION,
   })
 }
 
 // Verify token
-export const verifyToken = (token: any) => {
-  new Promise(
-    (resolve: (value: any) => void, reject: (reason?: any) => void) => {
-      jwt.verify(
-        token,
-        process.env.JWT_SECRET_KEY,
-        (err: any, payload: any) => {
-          if (err) return reject(err)
-          resolve(payload)
-        }
-      )
-    }
-  )
-}
+export const verifyToken = (token: any): Promise<any> =>
+  new Promise((resolve, reject) => {
+    jwt.verify(
+      token,
+      process.env.ACCESS_TOKEN_KEY,
+      (err: any, payload: any) => {
+        if (err) return reject(err)
+        resolve(payload)
+      }
+    )
+  })
 
 // Register a new user
 export const signup = async (req: Request, res: Response): Promise<any> => {
@@ -43,7 +40,7 @@ export const signup = async (req: Request, res: Response): Promise<any> => {
 }
 
 // Sign in an already registered User
-export const signin = async (req: Request, res: Response) => {
+export const signin = async (req: any, res: any): Promise<any> => {
   if (!req.body.email || !req.body.password) {
     return res.status(400).send({ message: 'need email and password' })
   }
@@ -57,7 +54,7 @@ export const signin = async (req: Request, res: Response) => {
       return res.status(401).send(invalid)
     }
 
-    // const match = await user.checkPassword(req.body.password)
+    // check if password is valid
     const match = await user.isValidPassword(req.body.password)
 
     if (!match) {
@@ -66,32 +63,40 @@ export const signin = async (req: Request, res: Response) => {
 
     const token = newToken(user)
     return res.status(201).send({ acessToken: token })
-  } catch (e) {
-    console.error(e)
+  } catch (err) {
+    console.error(err)
     res.status(500).end()
   }
 }
 
 // Authenticate generated token
-// export const authenticateToken = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ): Promise<any> => {
-//   const authHeader = req.headers['authorization']
+export const authenticateToken = async (
+  req: any,
+  res: any,
+  next: any
+): Promise<any> => {
+  const authHeader = req.headers.authorization
 
-//   if (!authHeader || !authHeader.startsWith('Bearer')) {
-//     return res.status(401).end()
-//   }
+  if (!authHeader || !authHeader.startsWith('Bearer')) {
+    return res.status(401).end()
+  }
 
-//   const token = authHeader.split(' ')[1]
-//   if (token == null) return res.sendStatus(401)
+  const token = authHeader.split(' ')[1]
+  if (token == null) return res.sendStatus(401)
 
-//   let payload
-//   try {
-//     payload = verifyToken(token)
-//   } catch (err) {
-//     return res.status(401).end()
-//   }
+  let payload
+  try {
+    payload = await verifyToken(token)
+  } catch (err) {
+    return res.status(401).end()
+  }
 
-//   const user = await getRepository(User).findOne(payload.id)
+  const user = await getRepository(User).findOne(payload.id)
+
+  if (!user) {
+    return res.status(401).end()
+  }
+
+  req.user = user
+  next()
+}
