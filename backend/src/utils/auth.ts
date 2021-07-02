@@ -4,14 +4,14 @@ import { getRepository } from 'typeorm'
 import jwt from 'jsonwebtoken'
 
 // Generate new token
-export const newToken = (user: any) => {
+export const newToken = (user: any): string => {
   return jwt.sign({ id: user.id }, process.env.JWT_SECRET_KEY, {
     expiresIn: process.env.JWT_EXPIRATION,
   })
 }
 
 // Verify token
-export const verifyToken = (token: any) => {
+export const verifyToken = (token: string) => {
   new Promise((resolve: any, reject: any) => {
     jwt.verify(token, process.env.JWT_SECRET_KEY, (err: any, payload: any) => {
       if (err) return reject(err)
@@ -21,7 +21,7 @@ export const verifyToken = (token: any) => {
 }
 
 // Register a new user
-export const signup = async (req: Request, res: Response) => {
+export const signup = async (req: Request, res: Response): Promise<any> => {
   if (!req.body.email || !req.body.password) {
     return res.status(400).send({ message: 'need email and password' })
   }
@@ -37,8 +37,12 @@ export const signup = async (req: Request, res: Response) => {
 }
 
 // Authenticate generated token
-// export const authenticateToken = async (req: Request, res: Response, next: any) => {
-//   const authHeader = req.headers.authorization
+// export const authenticateToken = async (
+//   req: Request,
+//   res: Response,
+//   next: any
+// ): Promise<any> => {
+//   const authHeader = req.headers['authorization']
 
 //   if (!authHeader || !authHeader.startsWith('Bearer')) {
 //     return res.status(401).end()
@@ -47,25 +51,18 @@ export const signup = async (req: Request, res: Response) => {
 //   const token = authHeader.split(' ')[1]
 //   if (token == null) return res.sendStatus(401)
 
+//   try {
+//     // const payload= verifyToken(token)
+//     const user = await getRepository(User).findOne()
+//     const id = user.id
+    
 
-//   jwt.verify(token, process.env.JWT_SECRET_KEY, (err, user) => {
-//     if (err) return res.sendStatus(403)
-//     // req.user = user
-//   })
-
-  // let payload
-  // try {
-  //   payload = await verifyToken(token)
-  // } catch (err) {
-  //   return res.status(401).end()
-  // }
-
-  // const user = await getRepository(User).findOne(payload.id)
-
-  // if (!user) {
-  //   return res.status(401).end()
-  // }
-
-  
-  // next()
+//     // new code
+//     jwt.verify(token, process.env.JWT_SECRET_KEY, (err, id) => {
+//       if (err) return res.sendStatus(403)
+      
+//     })
+//   } catch (err) {
+//     return res.status(401).end()
+//   }
 // }
