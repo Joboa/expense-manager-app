@@ -9,7 +9,7 @@ class AuthController {
 
     let {email, password} = req.body
     if (!(email && password)) {
-      res.status(400).send()
+      res.status(400).send({ message: 'need email and password' })
     }
 
 
@@ -24,7 +24,7 @@ class AuthController {
     // check if password is valid
     const match = await user.isValidPassword(password)
     if (!match) {
-      res.status(401).send()
+      res.status(401).send({message: 'Invalid email and password!'})
       return
     }
 
@@ -35,7 +35,7 @@ class AuthController {
       {expiresIn: '1h'}
     )
 
-    res.send(token)
+    res.status(201).send({accessToken: token})
   }
 
 
