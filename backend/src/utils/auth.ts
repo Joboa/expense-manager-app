@@ -71,9 +71,9 @@ export const signin = async (req: any, res: any): Promise<any> => {
 
 // Authenticate generated token
 export const authenticateToken = async (
-  req: any,
-  res: any,
-  next: any
+  req: Request,
+  res: Response,
+  next: NextFunction
 ): Promise<any> => {
   const authHeader = req.headers.authorization
 
@@ -90,4 +90,6 @@ export const authenticateToken = async (
   } catch (err) {
     return res.status(401).end()
   }
+
+  next()
 }
