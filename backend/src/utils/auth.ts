@@ -70,33 +70,24 @@ export const signin = async (req: any, res: any): Promise<any> => {
 }
 
 // Authenticate generated token
-// export const authenticateToken = async (
-//   req: any,
-//   res: any,
-//   next: any
-// ): Promise<any> => {
-//   const authHeader = req.headers.authorization
+export const authenticateToken = async (
+  req: any,
+  res: any,
+  next: any
+): Promise<any> => {
+  const authHeader = req.headers.authorization
 
-//   if (!authHeader || !authHeader.startsWith('Bearer')) {
-//     return res.status(401).end()
-//   }
+  if (!authHeader || !authHeader.startsWith('Bearer')) {
+    return res.status(401).end()
+  }
 
-//   const token = authHeader.split(' ')[1]
-//   if (token == null) return res.sendStatus(401)
+  const token = authHeader.split(' ')[1]
+  if (token == null) return res.sendStatus(401)
 
-//   let payload
-//   try {
-//     payload = await verifyToken(token)
-//   } catch (err) {
-//     return res.status(401).end()
-//   }
-
-//   const user = await getRepository(User).findOne(payload.id)
-
-//   if (!user) {
-//     return res.status(401).end()
-//   }
-
-//   req.user = user
-//   next()
-// }
+  let payload
+  try {
+    payload = await verifyToken(token)
+  } catch (err) {
+    return res.status(401).end()
+  }
+}
