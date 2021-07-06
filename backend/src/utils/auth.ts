@@ -84,12 +84,20 @@ export const authenticateToken = async (
   const token = authHeader.split(' ')[1]
   if (token == null) return res.sendStatus(401)
 
-  let payload
+  let payload: any
   try {
     payload = await verifyToken(token)
   } catch (err) {
     return res.status(401).end()
   }
+
+  const user = await getRepository(User).findOne(payload.id)
+
+  if (!user) {
+    return res.status(401).end()
+  }
+
+  // req.user = user
 
   next()
 }
