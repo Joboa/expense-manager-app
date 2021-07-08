@@ -9,7 +9,8 @@
     "dev": "tsc -w & nodemon .",
     "ts": "ts-node src/index.ts",
     "ts-dev": "ts-node-dev src/index.ts",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "author": "john agyapong boamah <joboa2015@gmail.com>",
   "license": "ISC",
