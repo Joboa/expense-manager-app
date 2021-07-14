@@ -71,7 +71,7 @@ export const signin = async (req: any, res: any): Promise<any> => {
 
 // Authenticate generated token
 export const authenticateToken = async (
-  req: Request,
+  req: any,
   res: Response,
   next: NextFunction
 ): Promise<any> => {
@@ -97,7 +97,7 @@ export const authenticateToken = async (
     return res.status(401).end()
   }
 
-  // req.user = user
+  req.user = user
 
   next()
 }
