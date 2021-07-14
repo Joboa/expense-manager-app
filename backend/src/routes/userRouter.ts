@@ -3,6 +3,9 @@ import UserController from '../controllers/user.controller'
 
 const router = Router()
 
+// api/v1/users/me
+router.get('/me', UserController.getMe)
+
 // /api/v1/users/
 router.route('/')
   .get(UserController.getUsers)
