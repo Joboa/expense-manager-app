@@ -1,8 +1,8 @@
-import { Expense} from '../expense'
+import { Expense } from '../expense'
 import { TestDatabase } from './TestDatabase'
 import { clone } from '../../utils/clone'
 
-describe('Testing user component', () => {
+describe('Testing expense component', () => {
   const database = new TestDatabase()
   const expense = clone(new Expense())
 
@@ -38,7 +38,7 @@ describe('Testing user component', () => {
         .send({
           id: 1,
           amount: 20,
-          description: 'Bought a T-shirt'
+          description: 'Bought a T-shirt',
         })
         .expect(201)
 
@@ -69,13 +69,12 @@ describe('Testing user component', () => {
     })
   })
 
-
   describe('UPDATE /expenses/:id', () => {
     it('updates an Expense', async () => {
       const data = {
         id: 1,
         amount: 20,
-        description: 'Bought a T-shirt'
+        description: 'Bought a T-shirt',
       }
       const response = await database.app
         .put('/api/v1/expenses/' + data.id)
