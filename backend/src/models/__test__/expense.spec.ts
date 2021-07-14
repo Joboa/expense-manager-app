@@ -95,7 +95,7 @@ describe('Testing expense component', () => {
         id: 1,
       }
       const response = await database.app
-        .put('/api/v1/expenses/' + data.id)
+        .delete('/api/v1/expenses/' + data.id)
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(200)
