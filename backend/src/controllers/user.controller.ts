@@ -4,8 +4,8 @@ import { getRepository } from 'typeorm'
 
 class UserController {
 
-  static getMe = async (req: Request, res: Response) => {
-  //  res.status(200).json({data: req.user})
+  static getMe = async (req: any, res: Response) => {
+      res.status(200).json({data: req.user})
   }
 
   static createUser = async (req: Request, res: Response): Promise<any> => {
