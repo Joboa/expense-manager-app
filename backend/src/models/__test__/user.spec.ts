@@ -6,11 +6,11 @@ describe('Testing user component', () => {
   const database = new TestDatabase()
   const user = clone(new User())
 
-  // user.id = 1
-  // user.email = 'x@email.com'
-  // user.firstname = 'Vic'
-  // user.lastname = 'Sidious'
-  // user.password = 'pieTillIDie'
+  user.id = 1
+  user.email = 'x@email.com'
+  user.firstname = 'Vic'
+  user.lastname = 'Sidious'
+  user.password = 'pieTillIDie'
 
   beforeEach(async () => {
     await database.init()
