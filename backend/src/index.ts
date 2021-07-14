@@ -14,10 +14,10 @@ const app: Application = express()
 app.use(json())
 app.use(urlencoded({ extended: true }))
 
-// app.post('/signup', signup)
-// app.post('/signin', signin)
+app.post('/signup', signup)
+app.post('/signin', signin)
 
-// app.use('/api/v1', authenticateToken)
+app.use('/api/v1', authenticateToken)
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/expenses', expenseRouter)
 
