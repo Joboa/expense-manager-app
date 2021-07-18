@@ -6,12 +6,12 @@ import { config } from 'dotenv'
 config()
 
 import { createConnection, ConnectionOptions, Connection } from 'typeorm'
-import { createServer, Server as HttpServer } from 'http'
+import { Server as HttpServer } from 'http'
 
 import express from 'express'
 import supertest from 'supertest'
 
-import { app } from '../../index'
+import { app } from '../../app'
 
 import { User, Expense } from '..'
 
@@ -49,12 +49,12 @@ export class TestDatabase {
 
   public async kill(): Promise<void> {
     this._server.close()
-    this._connection.close()
+    await this._connection.close()
   }
 
   private async startup(): Promise<void> {
     this._connection = await createConnection(this.connectionOptions)
     this._app = app
-    this._server = createServer(this._app).listen(process.env.NODE_PORT)
+    this._server = app.listen(5002)
   }
 }
