@@ -3,9 +3,8 @@ import { Request, Response } from 'express'
 import { getRepository } from 'typeorm'
 
 class UserController {
-
   static getMe = async (req: any, res: Response) => {
-      res.status(200).json({data: req.user})
+    res.status(200).json({ data: req.user })
   }
 
   static createUser = async (req: Request, res: Response): Promise<any> => {

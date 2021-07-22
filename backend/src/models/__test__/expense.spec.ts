@@ -2,7 +2,7 @@ import { Expense } from '../expense'
 import { TestDatabase } from './TestDatabase'
 import { clone } from '../../utils/clone'
 
-describe('Testing expense component', () => {
+xdescribe('Testing expense component', () => {
   const database = new TestDatabase()
   const expense = clone(new Expense())
 

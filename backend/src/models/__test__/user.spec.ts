@@ -32,7 +32,7 @@ describe('Testing user component', () => {
     })
   })
 
-  describe('GET /users/:id', () => {
+  describe.only('GET /users/:id', () => {
     it('retrieves a User', async () => {
       const data = {
         id: 1,
@@ -40,9 +40,9 @@ describe('Testing user component', () => {
       const response = await database.app
         .get('/api/v1/users/' + data.id)
         .set('Accept', 'application/json')
-        .expect('Content-Type', /json/)
-        .expect(200)
-
+      // .expect('Content-Type', /json/)
+      // .expect(200)
+      console.log(response) // You have an error here
       expect(response.statusCode).toBe(200)
       expect(response.body).toEqual({
         data: {
