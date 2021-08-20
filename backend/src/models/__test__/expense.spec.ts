@@ -2,7 +2,7 @@ import { Expense } from '../expense'
 import { TestDatabase } from './TestDatabase'
 import { clone } from '../../utils/clone'
 
-xdescribe('Testing expense component', () => {
+describe('Testing expense component', () => {
   const database = new TestDatabase()
   const expense = clone(new Expense())
 
@@ -23,7 +23,7 @@ xdescribe('Testing expense component', () => {
         .get('/api/v1/expenses')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
-        .expect(200)
+        // .expect(200)
 
       expect(response.statusCode).toBe(200)
     })
@@ -40,7 +40,7 @@ xdescribe('Testing expense component', () => {
           amount: 20,
           description: 'Bought a T-shirt',
         })
-        .expect(201)
+        // .expect(201)
 
       expect(response.statusCode).toBe(201)
     })
@@ -55,7 +55,7 @@ xdescribe('Testing expense component', () => {
         .get('/api/v1/expenses/' + data.id)
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
-        .expect(200)
+        // .expect(200)
 
       expect(response.statusCode).toBe(200)
       expect(response.body).toEqual({
@@ -83,7 +83,7 @@ xdescribe('Testing expense component', () => {
         .send({
           amount: 50,
         })
-        .expect(200)
+        // .expect(200)
 
       expect(response.statusCode).toBe(200)
     })
@@ -98,7 +98,7 @@ xdescribe('Testing expense component', () => {
         .delete('/api/v1/expenses/' + data.id)
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
-        .expect(200)
+        // .expect(200)
 
       expect(response.statusCode).toBe(200)
     })
