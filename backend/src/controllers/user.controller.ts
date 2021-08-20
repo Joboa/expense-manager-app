@@ -28,8 +28,8 @@ class UserController {
     try {
       const getUsersResult = await getRepository(User).find()
 
-      if (!getUsersResult)
-        return res.status(400).send({ message: 'No user found!' })
+      // if (!getUsersResult)
+      //   return res.status(400).send({ message: 'No user found!' })
 
       return res.status(200).json({ data: getUsersResult })
     } catch (err) {
@@ -43,8 +43,8 @@ class UserController {
       const { id } = req.params
       const getUserResult = await getRepository(User).findOne(id)
 
-      if (!getUserResult)
-        return res.status(400).send({ message: 'No user found!' })
+      // if (!getUserResult)
+      // return res.status(400).send({ message: 'No user found!' })
 
       return res.status(200).json({ data: getUserResult })
     } catch (err) {
@@ -55,16 +55,22 @@ class UserController {
 
   static updateUser = async (req: Request, res: Response): Promise<any> => {
     try {
-      const { id } = req.params
-      const updateUserInfo = await getRepository(User).findOne(id)
+      let updateUserInfo = await getRepository(User).findOne(req.params.id)
+      updateUserInfo.firstname = req.body.firstname
+      updateUserInfo.lastname = req.body.lastname
+      updateUserInfo.email = req.body.email
+      updateUserInfo.password = req.body.password
 
-      if (updateUserInfo) {
-        getRepository(User).merge(updateUserInfo, req.body)
-        const updatedUserInfo = await getRepository(User).save(updateUserInfo)
-        return res.status(200).json({ data: updatedUserInfo })
-      }
+      let updatedUserInfo = await getRepository(User).save(updateUserInfo)
 
-      return res.status(400).json({ message: 'User not found!' })
+      return res.status(200).json({ data: updatedUserInfo })
+
+      // if (updateUserInfo) {
+      // getRepository(User).merge(updateUserInfo, req.body)
+      // const updatedUserInfo = await getRepository(User).save(updateUserInfo)
+      // return res.status(200).json({ data: updatedUserInfo })
+      // }
+      // return res.status(400).json({ message: 'User not found!' })
     } catch (err) {
       console.error(err)
       res.status(400).end()
@@ -76,9 +82,9 @@ class UserController {
       const { id } = req.params
       const deleted = await getRepository(User).delete(id)
 
-      if (!deleted) {
-        return res.status(400).end()
-      }
+      // if (!deleted) {
+      //   return res.status(400).end()
+      // }
 
       return res.status(200).json({ data: deleted })
     } catch (err) {
